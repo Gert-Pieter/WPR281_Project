@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modifingperson.css">
     <title>Document</title>
     
 </head>
@@ -12,9 +13,9 @@
     </header>
 
     <main>
-        <h1>Create New Person</h1>
         <p>
             <fieldset id="addingperson">
+                <h1>Create New Person</h1>
                 <form action="" id="personForm">
                     <input type="text" id="fname" name="fname" required placeholder="First Name" minlength="2" pattern="[A-Za-z\-\`]+" title="First name should be longer then 2, not contain any characters that aren't ` or - and not contain any numbers."> 
                     <!-- Form validation is in place it checks that the minal is at least above 2 and that it allowee -->
@@ -23,29 +24,24 @@
                     <br/>
                     <input type="email" id="email" name="email" required placeholder="Person email">
                     <br/>
-                    <label for=""></label>
-                    <input type="file" name="pPic" id="pPic" accept="image/*">
+                    <label class="customName">
+                    <input type="file" name="pPic" id="pPic" accept="image/*">upload picture
+                    </label>
                     <br/>
                     <img id="preview" src="" alt="Profile Picuture Preview">
                     <br/>
                     <button type="submit">Add person</button>
                 </form>
-            </fieldset>
-            <h1>OR remove a person </h1>
+            </fieldset><br><br>
             <fieldset id="removingperson" >
+                <h1>Remove a person </h1>
                 <form action="" id="removepersonform">
                     <!-- <label for="fname">First Name:</label> -->
-                    <input type="text" id="fname" name="fname" required placeholder="First Name">
-                    <br>
-                    <!-- <label for="lname">Last Name:</label> -->
-                    <input type="text" id="lname" name="lname" required placeholder="Last Name">
+                    <input type="text" id="uname" name="uname" required placeholder="User name">
                     <br/>
-                    <!-- <label for="email">Email:</label> -->
                     <input type="email" id="email" name="email" required placeholder="Person email">
                     <br/>
-                    <!-- <label for="pPic">Profile Picture</label>
-                    <input type="image" id="Ppic" name="Ppic"> -->
-                    <!-- <button type="submit">Add person</button> -->
+                    <button type="submit">Remove Person</button>
                 </form>
             </fieldset>
         </p>
