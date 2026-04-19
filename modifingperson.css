@@ -1,1 +1,67 @@
-fdgdgffdg
+body
+{
+    background-color: #0D0D0D;
+    color: #CCCCCC;
+}
+#addingperson,#removingperson
+{
+    background-color: #1A1A1A;
+    border: none;
+    border-radius: 25px;
+    width: 500px;
+    height: auto;
+    justify-content: center;
+}
+.heading
+{
+    color:#FFB800;
+}
+
+#fname,#lname,#email,#uname
+{
+    text-align: center;
+    border:none;
+    margin: 5px;
+    background-color: #373535;
+    border-radius: 25px;
+    color:white;
+    height: 25px;
+}
+#fname,#lname,#email,#uname:hover
+{
+    text-align: center;
+    border:none;
+    margin: 5px;
+    background-color: #373535;
+    border-radius: 50px;
+    color:white;
+    height: 25px;
+}
+input[type="file"] {
+    display: none;
+}
+.customName
+{
+    margin: 5px;
+    border: none;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #373535;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button
+{
+    margin: 5px;
+    border: none;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #373535;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
