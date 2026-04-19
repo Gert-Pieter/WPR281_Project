@@ -15,9 +15,16 @@ let people = [
         FirstName:"Jack",
         LastName:"Wiilem",
         email:"jack.w@gmail.com",
-        username:"Jac123"
+        username:"Jac123",
+         profilePhoto: ""
     },
-    {}
+    {id:1,
+        FirstName:"Sara",
+        LastName:"Sea",
+        email:"sara.s@gmail.com",
+        username:"Sar232",
+        profilePhoto: ""
+    }
 ]
 // issues storage
 let issues = [
@@ -52,28 +59,68 @@ localStorage.setItem('admin',JSON.stringify(admin));
 // Adds person to local storage
 
 function addingperson() {
-    let personForm = document.getElementById(`personForm`);
+    let personForm = document.getElementById(`personForm`),
+    profilepicture = document.getElementById("pPic"),
+    preview = document.getElementById("preview"),
+    base64Image= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkDHQ4DDAwNDh8SFBcOFhQXFhYVFRUYHSggGBolHRUUITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NDg0NDy0ZFRkAKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOAA4AMBE..." //defualt profile picture
+
+    // since local storage can't store images we will be converting it in lon string file to store the data.
+    profilepicture.addEventListener('change',function() {
+        let file = this.files[0];
+        if (file){
+            let reader = new FileReader();
+
+            reader.onload = function (e) {
+                base64Image = e.target.result;//this converts it into a string
+                preview.src = base64Image; //this show the person the profile picture
+                preview.style.display = "block";
+            }
+            reader.readAsDataURL(file)
+        }
+    })
     
     personForm.addEventListener('submit', (e) => {
         e.preventDefault(); //stops refreshing
     
         // Getting the data from the form
-        let formdata = new FormData(personForm) //Instead of getting each input manually formdata takes all input elements and we can then just use it 
-    
-        let FirstName = formdata.get('fname'),
+        let formdata = new FormData(personForm), //Instead of getting each input manually formdata takes all input elements and we can then just use it 
+        FirstName = formdata.get('fname'),
         LastName = formdata.get('lname'),
-        email = formdata.get('email'),
-        username = FirstName.slice(0,3) + "123"
+        email = formdata.get('email')
+
+        
         let newdata = {
+            id:people[people.length-1].id+1,
             FirstName: FirstName,
             LastName: LastName,
             email: email,
-            username: username
+            username: FirstName.slice(0,3) +  (people[people.length-1].id+1).toString(),
+            profilePhoto: base64Image
         };
-    
+        
+    });
+        for(let i of person ) {
+        if (people[i].username == newdata.username) {
+            alert('person already exisits')
+        }
+        else{
         people.push(newdata);
+        alert("Person added succesfully!");
+        personForm.reset();
         localStorage.setItem('people',JSON.stringify(people))
-    })
+        }
+    }
+ }
+
+function removingperson() {
+let removingpersonform = document.getElementById("removepersonform"),
+formdata = new FormData('removepersonform'),
+FirstName = formdata.get('fname'),
+LastName = formdata.get('lname'),
+email = formdata.get('email')
+
+
+
 }
 
 function addingproject() {
@@ -89,14 +136,15 @@ function checkingAdmin()
     let message = document.getElementById('message');
     let test = document.getElementById('test')
         test.innerText=input.uname, admin.uname;
-    if(!(input.password==admin.password)) {
+    if(input.password!=admin.password) {
+        message.innerText ='wrong password. Try again'
     }
     else {
-        if(!(input.uname === admin.username)){
+        if(!(input.uname == admin.uname)){
             message.innerText = 'wrong username. Try again'
         }
         else{
-            if(!(input.email===admin.email))
+            if(!(input.email==admin.email))
                 {
                 message.innerText = 'wrong email. Try again'
             }
