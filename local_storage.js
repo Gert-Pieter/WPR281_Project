@@ -127,10 +127,16 @@ function addingperson() {
             return;
         }
         else{
+            if(test=0){
+                alert(`you can't remove a admin`);
+                return;
+            }
+            else{
             people.splice(test,1);
             localStorage.setItem('people', JSON.stringify(people));
             alert(`person removed`);
             removingpersonform.reset();
+        }
         }
     })
 
