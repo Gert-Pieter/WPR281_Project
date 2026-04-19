@@ -14,8 +14,8 @@
         </h1>
         <ul>
             <li><a href="#" class="active-nav">Home</a></li>
-            <li><a href="/all_bugs/all_bugs.html">All Reports</a></li>
-            <li><a href="/add/add_tickets.html">Add Tickets</a></li>
+            <li><a href="all_bugs.html">All Reports</a></li>
+            <li><a href="#">Add Tickets</a></li>
         </ul>
     </nav>
 
@@ -43,17 +43,17 @@
     <div class="fastnums">
         <h2>This Week</h2>
         <div class="newnums">
-            <img src="/images/list.png">
+            <img src="images/list.png">
             <p class="number">4</p>
             <p>Pending</p> 
         </div>
         <div class="inprogressnums">
-            <img src="/images/hourglass.png">
+            <img src="images/hourglass.png">
             <p class="number">4</p>
             <p>In Progress</p>
         </div>
         <div class="completenums">
-            <img src="/images/check.png" alt="" srcset="">
+            <img src="images/check.png" alt="" srcset="">
             <p class="number">4</p>
             <p>Completed</p>
         </div>
@@ -61,104 +61,20 @@
 
     <h2>New Bugs</h2>
     <div>
-        <ul class="row">
-            <li>
-                <div class="card new" onclick="openModal()">
-                    <h4>MEMORY_LEAK_IN_RENDER_ENGINE</h4>
-                    <p>System slows significantly after 4 hours of continuous operational stream processing in Sector 7G.</p>
-                    <div class="importance crit">Critical</div>
-                </div>
-            </li>
-            <li>
-                <div class="card new">
-                    <h4>ASSET_MAPPING_MISALIGNMENT</h4>
-                    <p>Coordinates provided by satellite telemetry are offset by 4.2m on the Z-axis.</p>
-                    <div class="importance med">Medium</div>
-                </div>
-            </li>
-            <li>
-                <div class="card new">
-                    <h4>MEMORY_LEAK_IN_RENDER_ENGINE</h4>
-                    <p>System slows significantly after 4 hours of continuous operational stream processing in Sector 7G.</p>
-                    <div class="importance crit">Critical</div>
-                </div>
-            </li>
-            <li>
-                <div class="card new">
-                    <h4>ASSET_MAPPING_MISALIGNMENT</h4>
-                    <p>Coordinates provided by satellite telemetry are offset by 4.2m on the Z-axis.</p>
-                    <div class="importance med">Medium</div>
-                </div>
-            </li>
+        <ul class="row" id="new-row">
         </ul>
     </div>
 
 
     <h2>In Progress</h2>
     <div>
-        <ul class="row">
-            <li>
-                <div class="card active">
-                    <h4>POWER_GRID_VOLTAGE_FLUCTUATION</h4>
-                    <p>Assigned to: OPER_09. Core voltage stabilizing procedures initiated.</p>
-                    <div class="importance crit">Critical</div>
-                </div>
-            </li>
-            <li>
-                <div class="card active">
-                    <h4>TERMINAL_REFRESH_RATE_STUTTER</h4>
-                    <p>Assigned to: OPER_03. Replacing local physical display matrix.</p>
-                    <div class="importance low">Low</div>
-                </div>
-            </li>
-            <li>
-                <div class="card active">
-                    <h4>POWER_GRID_VOLTAGE_FLUCTUATION</h4>
-                    <p>Assigned to: OPER_09. Core voltage stabilizing procedures initiated.</p>
-                    <div class="importance crit">Critical</div>
-                </div>
-            </li>
-            <li>
-                <div class="card active">
-                    <h4>TERMINAL_REFRESH_RATE_STUTTER</h4>
-                    <p>Assigned to: OPER_03. Replacing local physical display matrix.</p>
-                    <div class="importance low">Low</div>
-                </div>
-            </li>
+        <ul class="row" id="inprogress">
         </ul>
     </div>
 
     <h2>Completed Tickets</h2>
     <div>
-        <ul class="row">
-            <li>
-                <div class="card archived">
-                    <h4 class="dimmed">AUTHENTICATION_PROTOCOL_TIMEOUT</h4>
-                    <p>Resolved 12h ago via patch 1.04.</p>
-                    <div class="importance med">Medium</div>
-                </div>
-            </li>
-            <li>
-                <div class="card archived">
-                    <h4 class="dimmed">UI_SCALING_ON_WIDE_HUD</h4>
-                    <p>Resolved 1d ago. Hotfix deployed to all units.</p>
-                    <div class="importance low">Low</div>
-                </div>
-            </li>
-            <li>
-                <div class="card archived">
-                    <h4 class="dimmed">AUTHENTICATION_PROTOCOL_TIMEOUT</h4>
-                    <p>Resolved 12h ago via patch 1.04.</p>
-                    <div class="importance med">Medium</div>
-                </div>
-            </li>
-            <li>
-                <div class="card archived">
-                    <h4 class="dimmed">UI_SCALING_ON_WIDE_HUD</h4>
-                    <p>Resolved 1d ago. Hotfix deployed to all units.</p>
-                    <div class="importance low">Low</div>
-                </div>
-            </li>
+        <ul class="row" id="archived">
         </ul>
     </div>
 
