@@ -85,10 +85,9 @@ function addingperson() {
         // Getting the data from the form
         let formdata = new FormData(personForm), //Instead of getting each input manually formdata takes all input elements and we can then just use it 
         FirstName = formdata.get('fname'),
-        LastName = formdata.get('lname'),
         email = formdata.get('email'),
         people = JSON.parse(localStorage.getItem('people'))
-
+        
         if (people.some(person => person.email==email)){ //validation: ensures that the person does not exits by checking the email adress
             alert('person already exisits')
             return;
@@ -103,7 +102,7 @@ function addingperson() {
             username: FirstName.slice(0,3) +  (people[people.length-1].id+1).toString(),
             profilePhoto: base64Image
         };
-
+        
         people.push(newdata);
         alert("Person added succesfully!");
         personForm.reset();
@@ -111,14 +110,29 @@ function addingperson() {
     })
  }
 
-function removingperson() {
-let removingpersonform = document.getElementById("removepersonform"),
-formdata = new FormData('removepersonform'),
-FirstName = formdata.get('fname'),
-LastName = formdata.get('lname'),
-email = formdata.get('email')
+ function removingperson() {
 
-
+     let removingpersonform = document.getElementById("removepersonform")
+     
+     removepersonform.addEventListener(`submit`,(e) => {
+         e.preventDefault();
+        let formdata = new FormData(removepersonform),
+        uname = formdata.get('uname'),
+        email = formdata.get('email'),
+        people = JSON.parse(localStorage.getItem('people')),
+        test = people.findIndex(person=> person.email === email)// we remove the person by checking their email adress 
+        
+        if(test === -1){
+            alert(`this person doesn't exits`);
+            return;
+        }
+        else{
+            people.splice(test,1);
+            localStorage.setItem('people', JSON.stringify(people));
+            alert(`person removed`);
+            removingpersonform.reset();
+        }
+    })
 
 }
 
@@ -155,3 +169,4 @@ function checkingAdmin()
 }
 
 addingperson();
+removingperson();
