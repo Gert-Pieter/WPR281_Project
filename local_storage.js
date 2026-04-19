@@ -22,7 +22,7 @@ let people = [
         FirstName:"Sara",
         LastName:"Sea",
         email:"sara.s@gmail.com",
-        username:"Sar232",
+        username:"Sar1",
         profilePhoto: ""
     }
 ]
@@ -86,7 +86,13 @@ function addingperson() {
         let formdata = new FormData(personForm), //Instead of getting each input manually formdata takes all input elements and we can then just use it 
         FirstName = formdata.get('fname'),
         LastName = formdata.get('lname'),
-        email = formdata.get('email')
+        email = formdata.get('email'),
+        people = JSON.parse(localStorage.getItem('people'))
+
+        if (people.some(person => person.email==email)){ //validation: ensures that the person does not exits by checking the email adress
+            alert('person already exisits')
+            return;
+        }
 
         
         let newdata = {
@@ -97,19 +103,12 @@ function addingperson() {
             username: FirstName.slice(0,3) +  (people[people.length-1].id+1).toString(),
             profilePhoto: base64Image
         };
-        
-    });
-        for(let i of person ) {
-        if (people[i].username == newdata.username) {
-            alert('person already exisits')
-        }
-        else{
+
         people.push(newdata);
         alert("Person added succesfully!");
         personForm.reset();
         localStorage.setItem('people',JSON.stringify(people))
-        }
-    }
+    })
  }
 
 function removingperson() {
