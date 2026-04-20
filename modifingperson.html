@@ -23,6 +23,8 @@
                     <input type="text" id="lname" name="lname" required placeholder="Last Name" minlength="3" pattern="[A-Za-z\-\`\s]+" title="Sure name should be longer then 2, not contain any characters that aren't ` or - and not contain any numbers.">
                     <br/>
                     <input type="email" id="email" name="email" required placeholder="Person email">
+                    <br>
+                    <a id="email-wrong"></a>
                     <br/>
                     <label class="customName">
                     <input type="file" name="pPic" id="pPic" accept="image/*">upload picture
@@ -31,6 +33,8 @@
                     <img id="preview" src="images/default.profile.pic.jpg" alt="Profile Picuture Preview">
                     <br/>
                     <button type="submit">Add person</button>
+                    <br>
+                    <a id="successful"></a>
                 </form>
             </fieldset><br><br>
             <fieldset id="removingperson" >
@@ -42,6 +46,7 @@
                     <input type="email" id="email" name="email" required placeholder="Person email">
                     <br/>
                     <button type="submit">Remove Person</button>
+                    <br><a id="message"> </a>
                 </form>
             </fieldset>
         </p>
