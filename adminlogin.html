@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modifingperson_admin.css">
     <title>Document</title>
 </head>
 <body>
@@ -10,15 +11,17 @@
         
     </header>
     <main>
-        <form action="" id="adminLogin">
-            <h1>Admin Login</h1>
-            <input type="text" id="uname" name="uname" placeholder="Admin User name"><br>
-            <input type="text" id="email" name="email" placeholder="Admin email">
-            <p id="message"></p>
-            <input type="password" id="password" name="password" placeholder="password"><br>
-            <button type="button" onclick="checkingAdmin()">Login</button>
-            <p id="test"></p>
-        </form>
+        <center>
+        <fieldset id="adminLoginStyle">
+            <form action="" id="adminLogin">
+                <h1 class="heading">Admin Login</h1>
+                <input type="text" id="uname" name="uname" placeholder="Admin User name"><br>
+                <input type="text" id="email" name="email" placeholder="Admin email"><br>
+                <input type="password" id="password" name="password" placeholder="password"><br>
+                <button type="button" onclick="checkingAdmin()">Login</button>
+            </form>
+        </fieldset>
+        </center>
     </main>
     <footer>
         

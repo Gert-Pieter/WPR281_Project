@@ -15,7 +15,7 @@ let people = [
         FirstName:"Jack",
         LastName:"Wiilem",
         email:"jack.w@gmail.com",
-        username:"Jac123",
+        username:"Jac0",
          profilePhoto: ""
     },
     {id:1,
@@ -152,23 +152,24 @@ function checkingAdmin()
     let input = {uname: document.getElementById('uname').value,
         email:document.getElementById('email').value,
         password: document.getElementById('password').value};
-    let message = document.getElementById('message');
-    let test = document.getElementById('test')
-        test.innerText=input.uname, admin.uname;
     if(input.password!=admin.password) {
-        message.innerText ='wrong password. Try again'
+       alert(`Wrong Password,try again`)
     }
     else {
-        if(!(input.uname == admin.uname)){
-            message.innerText = 'wrong username. Try again'
+        if(input.uname != admin.uname){
+            alert(`Wrong username,try again`);
+            return;
         }
         else{
-            if(!(input.email==admin.email))
+            if(input.email!=admin.email)
                 {
-                message.innerText = 'wrong email. Try again'
+                    alert(`Wrong email adress, try again`);
+                    return;
             }
             else{
-                message.innerText = 'welcome'
+                alert(`Successful login, Welcome Admin`);
+                adminLogin.reset();
+                return;
             }
         }
     }
