@@ -4,10 +4,11 @@ let projects =
     {
         id:0,
         name: 'UI',
+        code: 'WD12',
         details:"To make the UI for the website"
     },
     {},
-]    
+],base64Image= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkDHQ4DDAwNDh8SFBcOFhQXFhYVFRUYHSggGBolHRUUITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NDg0NDy0ZFRkAKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOAA4AMBE..."    
 // People storage
 let people = [
     {
@@ -15,27 +16,29 @@ let people = [
         FirstName:"Jack",
         LastName:"Wiilem",
         email:"jack.w@gmail.com",
-        username:"Jac123",
-         profilePhoto: ""
+        username:"Jac0",
+         profilePhoto: base64Image
     },
     {id:1,
         FirstName:"Sara",
         LastName:"Sea",
         email:"sara.s@gmail.com",
         username:"Sar1",
-        profilePhoto: ""
+            profilePhoto: base64Image
     }
 ]
 // issues storage
 let issues = [
     {
-        id:"1232fdfd",
-        Summary:"UI is not working",
-        Details:"When clicking the button it does not work",
-        projectsRelatedTo:"also get",
-        PidentifiedIssue: "use get",
-        PassignedTofix:"also get",
-        status:""
+        id: "#101",
+        title: "ASSET_MAPPING_MISALIGNMENT",
+        subject: "Coordinates provided by satellite telemetry are offset by 4.2m on the Z-axis.",
+        priority: "Medium",
+        desc: "The mapping engine is failing to account for atmospheric refraction during high-angle passes, resulting in offset coordinate plots.",
+        project: "ProjectCD85",
+        assignedTo: "Ryan Reynolds",
+        dateReported: "2026-01-01",
+        completed: false
     },
     {}
 ]
@@ -85,11 +88,15 @@ function addingperson() {
         // Getting the data from the form
         let formdata = new FormData(personForm), //Instead of getting each input manually formdata takes all input elements and we can then just use it 
         FirstName = formdata.get('fname'),
+        LastName = formdata.get('lname'),
         email = formdata.get('email'),
+        emailStyle = document.getElementById('email'),//to style the form input 
         people = JSON.parse(localStorage.getItem('people'))
         
         if (people.some(person => person.email==email)){ //validation: ensures that the person does not exits by checking the email adress
-            alert('person already exisits')
+            document.getElementById("email-wrong").innerText = 'email already exitsts';//will display if they typed in a email that already exits
+            emailStyle.style.border = '1px solid red';//will make the input of email border red
+            emailStyle.focus();//will focus on the email input field to show what is wrong 
             return;
         }
 
@@ -104,7 +111,8 @@ function addingperson() {
         };
         
         people.push(newdata);
-        alert("Person added succesfully!");
+        document.getElementById('successful').innerText = "Person added succesfully!";
+        document.getElementById('successful').style.color = 'green';
         personForm.reset();
         localStorage.setItem('people',JSON.stringify(people))
     })
@@ -116,59 +124,105 @@ function addingperson() {
      
      removepersonform.addEventListener(`submit`,(e) => {
          e.preventDefault();
-        let formdata = new FormData(removepersonform),
+        let message = document.getElementById('message'),
+        formdata = new FormData(removepersonform),
         uname = formdata.get('uname'),
         email = formdata.get('email'),
         people = JSON.parse(localStorage.getItem('people')),
-        test = people.findIndex(person=> person.email === email)// we remove the person by checking their email adress 
+        test = people.findIndex(person=> person.email === email),// we remove the person by checking their email adress 
+        test1 = people.findIndex(person=> person.username === uname)
         
-        if(test === -1){
-            alert(`this person doesn't exits`);
+        if(test=== -1 && test1 === -1){
+            message.innerText = 'Person does not exits try again'
+            message.style.color = 'red';
+            message.style.fontStyle = 'italic';
             return;
         }
         else{
-            if(test=0){
-                alert(`you can't remove a admin`);
+            if(test===0 && test1 === 0){
+                message.innerText = 'You cannot remove the admin.';
+                message.style.color = 'red';
+                message.style.fontStyle = 'italic';
                 return;
             }
             else{
-            people.splice(test,1);
-            localStorage.setItem('people', JSON.stringify(people));
-            alert(`person removed`);
+                if (test != test1)
+                    {
+                        message.innerText = 'Username or email is incorrect, try again'
+                        message.style.color = 'red';
+                        message.style.fontStyle = 'italic';
+                    }
+                    else{
+                        people.splice(test,1);
+                        localStorage.setItem('people', JSON.stringify(people));
+                message='Person removed';
+                message.style.color = 'green';
+                message.style.fontStyle = 'italic';
             removingpersonform.reset();
         }
-        }
+    }
+}
     })
 
 }
 
 function addingproject() {
+    let projects = JSON.parse(localStorage.getItem('projects')),
+    projectForm = document.getElementById('projectForm')
+
+    projectForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        let FormData = new FormData(projectForm),
+        projectName = FormData.get('pname'),
+        codeName = FormData.get('cname'),
+        pdetails = FormData.get('pdetails')
+
+        if(projects.some(element => 
+             element.code == codeName))
+        {
+            alert('wrong project code');
+            return;
+        }
+        })
     
 }
 
 function checkingAdmin()
 {
-    // let admin = JSON.parse(localStorage.getItem('admin'));
-    let input = {uname: document.getElementById('uname').value,
+    let admin = JSON.parse(localStorage.getItem('admin')),
+    input = {uname: document.getElementById('uname').value,
         email:document.getElementById('email').value,
-        password: document.getElementById('password').value};
-    let message = document.getElementById('message');
-    let test = document.getElementById('test')
-        test.innerText=input.uname, admin.uname;
+        password: document.getElementById('password').value},
+        pswMsg = document.getElementById('pswMsg'),
+        unmMsg = document.getElementById('unmMsg'),
+        emnMsg = document.getElementById('emnMsg'),
+        sLg = document.getElementById('sLg')
     if(input.password!=admin.password) {
-        message.innerText ='wrong password. Try again'
-    }
-    else {
-        if(!(input.uname == admin.uname)){
-            message.innerText = 'wrong username. Try again'
-        }
-        else{
-            if(!(input.email==admin.email))
-                {
-                message.innerText = 'wrong email. Try again'
-            }
-            else{
-                message.innerText = 'welcome'
+        pswMsg.innerText = 'Wrong password, try again.';
+                   password.style.border = '1px solid red';
+                   pswMsg.style.color = 'red';
+                }
+                else {
+                    if(input.uname != admin.uname){
+                        unmMsg.innerText = 'wrong username, try again.';    
+                        uname.style.border = '1px solid red';
+                        unmMsg.style.color = 'red';
+                        return;
+                    }
+                    else{
+                        if(input.email!=admin.email)
+                            {
+                                emnMsg.innerText = 'wrong email, try again.';    
+                                email.style.border = '1px solid red';
+                                emnMsg.style.color = 'red';
+                                
+                                return;
+                            }
+                            else{
+                sLg.innerText = 'Welcome Admin.';    
+                sLg.style.color = 'green';
+                adminLogin.reset();
+                return;
             }
         }
     }
@@ -176,3 +230,4 @@ function checkingAdmin()
 
 addingperson();
 removingperson();
+addingproject();
