@@ -71,3 +71,10 @@ button
     height: 250px;
     border-radius: 150px;
 }
+
+#email-wrong
+{
+    font-style: italic;
+    color: red;
+}
+
