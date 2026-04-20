@@ -50,6 +50,14 @@ footer{
 img{
     height: 75px;
 }
+button{
+    height: 30px;
+    width: 80px;
+    background-color:#585858;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+}
 .modal-overlay{
     display: none;
     position: fixed;

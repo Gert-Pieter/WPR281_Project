@@ -29,13 +29,15 @@ let people = [
 // issues storage
 let issues = [
     {
-        id:"1232fdfd",
-        Summary:"UI is not working",
-        Details:"When clicking the button it does not work",
-        projectsRelatedTo:"also get",
-        PidentifiedIssue: "use get",
-        PassignedTofix:"also get",
-        status:""
+        id: "#101",
+        title: "ASSET_MAPPING_MISALIGNMENT",
+        subject: "Coordinates provided by satellite telemetry are offset by 4.2m on the Z-axis.",
+        priority: "Medium",
+        desc: "The mapping engine is failing to account for atmospheric refraction during high-angle passes, resulting in offset coordinate plots.",
+        project: "ProjectCD85",
+        assignedTo: "Ryan Reynolds",
+        dateReported: "2026-01-01",
+        completed: false
     },
     {}
 ]
