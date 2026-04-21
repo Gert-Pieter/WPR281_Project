@@ -105,20 +105,16 @@ function renderbugs(listToDisplay = data) {
   buglist.innerHTML = '';
 
   listToDisplay.forEach(bug => {
-    //Creates the overall card
     const bugcard = document.createElement('div');
     bugcard.className = 'bugcard';
 
-    //Creates Heading for the card
     const titleTag = document.createElement('h5');
     titleTag.textContent = bug.title;
 
-    //Creates the date of issue
     const dateTag = document.createElement('p')
     dateTag.className = 'date'
     dateTag.textContent = bug.dateReported;
 
-    //Creates the priority targ
     const priorityTag = document.createElement('p')
     priorityTag.className = 'priority'
     priorityTag.textContent = bug.priority;
@@ -132,7 +128,7 @@ function renderbugs(listToDisplay = data) {
     bugcard.appendChild(priorityTag);
     bugcard.appendChild(projectTag);
 
-    bugcard.onclick = () => openModal(bug);
+    bugcard.onclick = () => openBugModal(bug);
 
     buglist.appendChild(bugcard);
   })
@@ -143,8 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const modal = document.getElementById('modalOverlay');
+const c_modal = document.getElementById('createOverlay')
 
-function openModal(bug) {
+function openBugModal(bug) {
   modal.querySelector('#modalTitle').textContent = bug.title;
   modal.querySelector('#modalID').textContent = bug.id;
   modal.querySelector('#modalSub').textContent = bug.subject;
@@ -160,9 +157,22 @@ function closeModal() {
   modal.style.display = 'none';
 }
 
-// Close the modal if the user clicks ANYWHERE outside the white box
 window.onclick = function(event) {
   if (event.target == modal) {
     closeModal();
+  }
+}
+
+function openCreateModal(){
+  c_modal.style.display = 'flex'
+}
+
+function closeCreateModal(){
+  c_modal.style.display = 'none'
+}
+
+window.onclick = function(event) {
+  if (event.target == c_modal) {
+    closeCreateModal();
   }
 }

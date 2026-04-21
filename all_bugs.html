@@ -14,8 +14,7 @@
         </h1>
         <ul>
             <li><a href="dashboard.html">Home</a></li>
-            <li><a href="#" class="active-nav">All Reports</a></li>
-            <li><a href="#">Add Tickets</a></li>
+            <li><a href="#" class="active-nav">All Tickets</a></li>
         </ul>
     </nav>
     <h1>All Bugs</h1>
@@ -39,6 +38,39 @@
         </div>
     </div>
 
+    <div id="createOverlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeCreateModal()">&times;</span>
+            <h1>Create New Ticket</h1>
+            <hr>
+            <br>
+            <form action="">
+                <label for="">Enter Title</label>
+                <input type="text" name="" id="titleinput" placeholder="Title of Ticket">
+
+                <label for="">Enter Subject</label>
+                <input type="text" name="" id="subjectinput">
+
+                <select name="" id="">
+                    <option>Project-Selection</option>
+                    <option value="Group1">Group 1</option>
+                    <option value="Group2">Group 2</option>
+                </select>
+
+                <select name="" id="">
+                    <option>Urgency-Level</option>
+                    <option value="">Low</option>
+                    <option value="">Medium</option>
+                    <option value="">High</option>
+                </select>
+
+                <textarea name="" id="" placeholder="Please explain the problem in detail"></textarea>
+
+                <button type="submit">Submit Tictet</button>
+            </form>
+        </div>
+    </div>
+
     <div class="allbugs">
         <div class="sidepanel">
             <div class="priorityfilters">
@@ -59,6 +91,7 @@
         </div>
         <div class="search">
             Search: <input type="text" class="search-filter" id="search">
+            <button onclick="openCreateModal()">Click Me</button>
         </div>
         <div class="buglist" id="buglist">
 
