@@ -13,12 +13,12 @@ body
     height: auto;
     justify-content: center;
 }
-.heading
+.heading,label
 {
     color:#FFB800;
 }
 
-#fname,#lname,#email,#uname,#password,#pname,#cname,#rcname,#summary
+#fname,#lname,#email,#uname,#password,#pname,#cname,#rcname,#summary,#projectC
 {
     text-align: center;
     border:none;

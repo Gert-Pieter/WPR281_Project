@@ -7,6 +7,13 @@ let projects =
         code: 'WD12',
         summary: 'UI for the website',
         details:"To make the UI for the website"
+    },
+    {
+        id:1,
+        name: 'Backend',
+        code: 'WD34',
+        summary: 'Backend for the website',
+        details:"To make the backend for the website"
     }
     
 ],base64Image= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkDHQ4DDAwNDh8SFBcOFhQXFhYVFRUYHSggGBolHRUUITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NDg0NDy0ZFRkAKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOAA4AMBE..."    
@@ -18,7 +25,8 @@ let people = [
         LastName:"Wiilem",
         email:"jack.w@gmail.com",
         username:"Jac0",
-         profilePhoto: base64Image
+        project: "WD12",
+        profilePhoto: base64Image
     },
     {id:1,
         FirstName:"Sara",
@@ -63,6 +71,18 @@ localStorage.setItem('admin',JSON.stringify(admin));
 // Adds person to local storage
 
 function addingperson() {
+
+    let projects = JSON.parse(localStorage.getItem('projects')),
+    projectC = document.getElementById('projectC')
+    projects.forEach(element => {
+        let projectChoice = document.createElement('option');
+        projectChoice.value = element.code;
+        projectChoice.innerText = element.code;
+        projectC.appendChild(projectChoice);        
+    });
+
+
+
     let personForm = document.getElementById(`personForm`),
     profilepicture = document.getElementById("pPic"),
     preview = document.getElementById("preview"),
@@ -107,6 +127,7 @@ function addingperson() {
             FirstName: FirstName,
             LastName: LastName,
             email: email,
+            project: formdata.get('projectC'),
             username: FirstName.slice(0,3) +  (people[people.length-1].id+1).toString(),
             profilePhoto: base64Image
         };
@@ -175,12 +196,13 @@ function addingproject() {
         let projects = JSON.parse(localStorage.getItem('projects')),
         formData = new FormData(projectForm),
         projectName = formData.get('pname'),
-        codeName = formData.get('cname'),
+        codeName = formData.get('pcode'),
         summary = formData.get('summary'),
         pdetails = formData.get('pdetails'),
         projectCMsg = document.getElementById('projectCMsg'),
         test = projects.findIndex(project => project.code === codeName)//validation: ensures that the project code is unique by checking the code of each project in the projects array
-
+        console.log(codeName);
+        
         if(test !== -1)
         {
             projectCMsg.innerText = 'Project code already exists.';
