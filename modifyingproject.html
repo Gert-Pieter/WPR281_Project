@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modifingperson_project_admin.css">
     <title>Document</title>
 </head>
 <body>
         <header>
 
     </header>
-
+    <center>
     <main>
-        <h1>Create New Project</h1>
-        <p>
+        <p><fieldset id="projectadd">
             <form action="" id="projectForm">
+                <h1 class="heading">Create New Project</h1>
                 <input type="text" id="pname" name="pname" required placeholder="Project Name">
                 <br>
                 <input type="text" id="cname" name="cname" required placeholder="Project Code"><br>
-                <textarea name="pdetails" id="pdetails" placeholder="Describe the project objective here...." rows="10" cols="30"></textarea>
+                <a id="projectCMsg"></a>
+                <input type="text" name="summary" id="summary" placeholder="Project Summary"><br>
+                <input type="text" name="pdetails" id="pdetails" placeholder="Description" rows="10" cols="30"></input>
                 <br/>
                 <button type="submit">Add Project</button>
+                <a id="projectMsg"></a>
             </form>
+        </fieldset>
+        <fieldset id="removeproject">
+            <form action="" id="removeProjectForm">
+                <h1 class="heading">Remove Project</h1>
+                <input type="text" id="rcname" name="rcname" required placeholder="Project Code">
+                <a id="projectrCMsg"></a>
+                <br>
+                <button type="submit">Remove Project</button>
+                <a id="projectrMsg"></a>
+            </form>
+        </fieldset>
         </p>
-        <script src="local_storage.js"></script>
+        <script src="local_storage.js" defer></script>
     </main>
-    
+    </center>
     <footer>
 
     </footer>
