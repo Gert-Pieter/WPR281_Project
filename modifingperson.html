@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="modifingperson_admin.css">
+    <link rel="stylesheet" href="modifingperson_project_admin.css">
     <title>Document</title>
     
 </head>
@@ -23,6 +23,11 @@
                     <input type="text" id="lname" name="lname" required placeholder="Last Name" minlength="3" pattern="[A-Za-z\-\`\s]+" title="Sure name should be longer then 2, not contain any characters that aren't ` or - and not contain any numbers.">
                     <br/>
                     <input type="email" id="email" name="email" required placeholder="Person email">
+                    <br>
+                    <label for="projectC">Project:</label>
+                    <select name="projectC" id="projectC" required>
+                        <option value="" disabled selected>Choose Project</option>
+                    </select>
                     <br>
                     <a id="email-wrong"></a>
                     <br/>

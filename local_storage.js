@@ -5,9 +5,17 @@ let projects =
         id:0,
         name: 'UI',
         code: 'WD12',
+        summary: 'UI for the website',
         details:"To make the UI for the website"
     },
-    {},
+    {
+        id:1,
+        name: 'Backend',
+        code: 'WD34',
+        summary: 'Backend for the website',
+        details:"To make the backend for the website"
+    }
+    
 ],base64Image= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkDHQ4DDAwNDh8SFBcOFhQXFhYVFRUYHSggGBolHRUUITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NDg0NDy0ZFRkAKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOAA4AMBE..."    
 // People storage
 let people = [
@@ -17,7 +25,8 @@ let people = [
         LastName:"Wiilem",
         email:"jack.w@gmail.com",
         username:"Jac0",
-         profilePhoto: base64Image
+        project: "WD12",
+        profilePhoto: base64Image
     },
     {id:1,
         FirstName:"Sara",
@@ -62,6 +71,18 @@ localStorage.setItem('admin',JSON.stringify(admin));
 // Adds person to local storage
 
 function addingperson() {
+
+    let projects = JSON.parse(localStorage.getItem('projects')),
+    projectC = document.getElementById('projectC')
+    projects.forEach(element => {
+        let projectChoice = document.createElement('option');
+        projectChoice.value = element.code;
+        projectChoice.innerText = element.code;
+        projectC.appendChild(projectChoice);        
+    });
+
+
+
     let personForm = document.getElementById(`personForm`),
     profilepicture = document.getElementById("pPic"),
     preview = document.getElementById("preview"),
@@ -106,6 +127,7 @@ function addingperson() {
             FirstName: FirstName,
             LastName: LastName,
             email: email,
+            project: formdata.get('projectC'),
             username: FirstName.slice(0,3) +  (people[people.length-1].id+1).toString(),
             profilePhoto: base64Image
         };
@@ -167,24 +189,69 @@ function addingperson() {
 }
 
 function addingproject() {
-    let projects = JSON.parse(localStorage.getItem('projects')),
-    projectForm = document.getElementById('projectForm')
-
+    let projectForm = document.getElementById('projectForm')
+    
     projectForm.addEventListener('submit',(e)=>{
         e.preventDefault();
-        let FormData = new FormData(projectForm),
-        projectName = FormData.get('pname'),
-        codeName = FormData.get('cname'),
-        pdetails = FormData.get('pdetails')
-
-        if(projects.some(element => 
-             element.code == codeName))
+        let projects = JSON.parse(localStorage.getItem('projects')),
+        formData = new FormData(projectForm),
+        projectName = formData.get('pname'),
+        codeName = formData.get('pcode'),
+        summary = formData.get('summary'),
+        pdetails = formData.get('pdetails'),
+        projectCMsg = document.getElementById('projectCMsg'),
+        test = projects.findIndex(project => project.code === codeName)//validation: ensures that the project code is unique by checking the code of each project in the projects array
+        console.log(codeName);
+        
+        if(test !== -1)
         {
-            alert('wrong project code');
+            projectCMsg.innerText = 'Project code already exists.';
+            projectCMsg.style.color = 'red';
+        }
+        else{
+            let newProject = {
+                id: projects[projects.length-1].id + 1,
+                name: projectName,
+                code: codeName,
+                summary: summary,
+                details: pdetails
+            };
+            projects.push(newProject);
+            localStorage.setItem('projects', JSON.stringify(projects));
+            projectMsg.innerText = 'Project added successfully.';
+            projectMsg.style.color = 'green';
+            projectForm.reset();
+        }
+    })
+
+}
+
+function removingproject() {
+    let removingprojectform = document.getElementById("removeProjectForm")
+
+    removingprojectform.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let projects = JSON.parse(localStorage.getItem('projects')),
+        formData = new FormData(removingprojectform),
+        codeName = formData.get('rcname'),
+        codeNameStyle = document.getElementById('rcname'),
+        projectrCMsg = document.getElementById('projectrMsg'),
+        test = projects.findIndex(project => project.code === codeName);
+
+        if(test === -1) {
+            projectrCMsg.innerText = 'Project not found.';
+            projectrCMsg.style.color = 'red';
+            codeNameStyle.style.border = '1px solid red';
+            return;
+        } else {
+            projects.splice(test, 1);
+            localStorage.setItem('projects', JSON.stringify(projects));
+            projectrsrMsg.innerText = 'Project removed successfully.';
+            projectrsCMsg.style.color = 'green';
+            removingprojectform.reset();
             return;
         }
-        })
-    
+    });
 }
 
 function checkingAdmin()
@@ -231,3 +298,4 @@ function checkingAdmin()
 addingperson();
 removingperson();
 addingproject();
+removingproject();
