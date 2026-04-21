@@ -194,11 +194,11 @@ function addingproject() {
     projectForm.addEventListener('submit',(e)=>{
         e.preventDefault();
         let projects = JSON.parse(localStorage.getItem('projects')),
-        formData = new FormData(projectForm),
-        projectName = formData.get('pname'),
-        codeName = formData.get('pcode'),
-        summary = formData.get('summary'),
-        pdetails = formData.get('pdetails'),
+        formdata = new FormData(projectForm),
+        projectName = formdata.get('pname'),
+        codeName = formdata.get('pcode'),
+        summary = formdata.get('summary'),
+        pdetails = formdata.get('pdetails'),
         projectCMsg = document.getElementById('projectCMsg'),
         test = projects.findIndex(project => project.code === codeName)//validation: ensures that the project code is unique by checking the code of each project in the projects array
         console.log(codeName);
