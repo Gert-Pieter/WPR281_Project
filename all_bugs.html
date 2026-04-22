@@ -15,8 +15,7 @@
         </h1>
         <ul>
             <li><a href="dashboard.html">Home</a></li>
-            <li><a href="#" class="active-nav">All Reports</a></li>
-            <li><a href="#">Add Tickets</a></li>
+            <li><a href="#" class="active-nav">All Tickets</a></li>
         </ul>
     </nav>
     <h1>All Bugs</h1>
@@ -37,6 +36,81 @@
                 <h4>Description:</h4>
                 <p id="modalDesc"></p>
             </div>
+            <div id="buttons">
+                <button onclick="completeTicket()">Complete</button>
+                <button onclick="editTicket()">Edit</button>
+                <button onclick="deleteTicket()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="createOverlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeCreateModal()">&times;</span>
+            <h1>Create New Ticket</h1>
+            <hr>
+            <br>
+            <form>
+                <label for="" id="titlelable">Enter Title</label><br>
+                <input type="text" name="" id="titleinput" placeholder="Title of Ticket">
+                <br>
+                <label for="" id="subjectlable">Enter Subject</label><br>
+                <input type="text" name="" id="subjectinput">
+                <br><br>
+                <select name="" id="P_Select">
+                    <option>Project-Selection</option>
+                    <option value="ProjectCD85">ProjectCD85</option>
+                    <option value="ProjectMD12">ProjectMD12</option>
+                </select>
+                <select name="" id="U_Select">
+                    <option>Urgency-Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Critical">Critical</option>
+                </select>
+                <br><br>
+                <textarea name="" id="Desc" placeholder="Please explain the problem in detail"></textarea>
+                <br><br>
+                <button type="submit" class="alt-button" id="sub" onclick="createTicket()">Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editOverlay">
+        <div class="modal-box">
+            <h1>Edit Ticket</h1>
+            <hr>
+            <form>
+                <label for="">ID:<span id="_id"></span></label><br><br>
+                <label for="" id="titlelable">Enter Title</label><br>
+                <input type="text" name="" id="editTitle" placeholder="Title of Ticket">
+                <br>
+                <label for="" id="subjectlable">Enter Subject</label><br>
+                <input type="text" name="" id="editSubject">
+                <br><br>
+                <select name="" id="E_P_Select">
+                    <option>Project-Selection</option>
+                    <option value="ProjectCD85">ProjectCD85</option>
+                    <option value="ProjectMD12">ProjectMD12</option>
+                </select>
+                <select name="" id="E_U_Select">
+                    <option>Urgency-Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Critical">Critical</option>
+                </select>
+                <br><br>
+                <textarea name="" id="editDesc" placeholder="Please explain the problem in detail"></textarea>
+                <br>
+                <select name="" id="editAssigned">
+                    <option value="Ryan Reynolds">Ryan Reynolds</option>
+                    <option value="Scarlett Johansson">Scarlett Johansson</option>
+                    <option value="Tom Hardy">Tom Hardy</option>
+                    <option value="Zendaya">Zendaya</option>
+                </select>
+                <br><br>
+                <button type="submit" class="alt-button" onclick="saveChanges()">Save Changes</button>
+            </form>
         </div>
     </div>
 
@@ -60,6 +134,7 @@
         </div>
         <div class="search">
             Search: <input type="text" class="search-filter" id="search">
+            <button onclick="openCreateModal()" id="create" class="alt-button">New Ticket</button>
         </div>
         <div class="buglist" id="buglist">
 
