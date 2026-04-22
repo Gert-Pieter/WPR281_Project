@@ -44,8 +44,6 @@ nav ul li a.active-nav {
     color: #FFFFFF;
 }
 footer{
-    position: absolute;
-    bottom: 0;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(1fr, 3);
@@ -153,7 +151,7 @@ label{
     background-color: #292929;
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-template-rows: 0.1fr 1fr;
+    grid-template-rows: 0.01fr 1fr;
 }
 .sidepanel{
     grid-column: 1/2;

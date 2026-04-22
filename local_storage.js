@@ -46,7 +46,7 @@ let issues = [
         priority: "Medium",
         desc: "The mapping engine is failing to account for atmospheric refraction during high-angle passes, resulting in offset coordinate plots.",
         project: "ProjectCD85",
-        assignedTo: "Ryan Reynolds",
+        assignedTo: "",
         dateReported: "2026-01-01",
         completed: false
     },
@@ -112,7 +112,7 @@ let issues = [
         priority: "High",
         desc: "A null reference exception is thrown in the export service when no assignee is set. No null check exists before accessing the assignee object properties.",
         project: "ProjectAB12",
-        assignedTo: "Amara Dube",
+        assignedTo: "",
         dateReported: "2026-01-20",
         completed: false
     },
@@ -200,7 +200,7 @@ let issues = [
         priority: "Low",
         desc: "The base64 image string is being stored in a local variable instead of being saved to localStorage with the rest of the person object. Data is lost on reload.",
         project: "ProjectCD85",
-        assignedTo: "Jack Wiilem",
+        assignedTo: "",
         dateReported: "2026-02-16",
         completed: false
     }
