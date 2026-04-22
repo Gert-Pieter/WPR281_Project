@@ -161,6 +161,10 @@ label{
     border-right: 1px solid #333;
     font-family: 'Inter', -apple-system, sans-serif;
 }
+.sidepanel p{
+    color: white;
+    font-size: 12pt;
+}
 .sidepanel h4{
     color: #888;
     font-size: 1.2rem;

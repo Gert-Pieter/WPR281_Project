@@ -8,8 +8,16 @@ function ProjectChoiceDropDown() { //This code provides a dropdown to remove pro
     
     projects.forEach(element => {
         let projectChoice = document.createElement('p');
-        projectChoice.value = element.code;
-        projectChoice.innerHTML = `<p><input type="checkbox" name="project" value="${element.code}" class="project-check filter-check">Project${element.code}</p>`;
+        let checkbox = document.createElement('input')
+        checkbox.setAttribute('type', 'checkbox')
+        checkbox.className = 'project-check filter-check';
+        checkbox.value = 'Project' + element.code
+        projectChoice.appendChild(checkbox);
+
+        let labelText = document.createTextNode('Project' + element.code);
+        projectChoice.appendChild(labelText);
+
+
         PC.appendChild(projectChoice);        
     });
 }
