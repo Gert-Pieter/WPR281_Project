@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const modal = document.getElementById('modalOverlay');
 const c_modal = document.getElementById('createOverlay')
+const e_modal = document.getElementById('editOverlay')
 
 function openBugModal(bug) {
   modal.querySelector('#modalTitle').textContent = bug.title;
@@ -103,8 +104,10 @@ function closeModal() {
 }
 
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == modal || event.target == c_modal || event.target == e_modal) {
     closeModal();
+    closeCreateModal();
+    closeEditModal();
   }
 }
 
@@ -116,10 +119,12 @@ function closeCreateModal(){
   c_modal.style.display = 'none'
 }
 
-window.onclick = function(event) {
-  if (event.target == c_modal) {
-    closeCreateModal();
-  }
+function openEditModal(){
+  e_modal.style.display = 'flex'
+}
+
+function closeEditModal(){
+  e_modal.style.display = 'none'
 }
 
 createTicket = (a=event) =>{
@@ -185,7 +190,7 @@ completeTicket = () => {
   const raw = localStorage.getItem('issues');
   let newstorage = JSON.parse(raw);
 
-  let idToDelete = document.getElementById('modalID').textContent.trim()
+  let idToDelete = document.getElementById('modalID').textContent
 
   newstorage = newstorage.filter(ticket => {
     if(ticket.id == idToDelete){
@@ -198,4 +203,58 @@ completeTicket = () => {
   localStorageData = newstorage;
   renderbugs();
   closeModal();
+}
+
+editTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToEdit = String(document.getElementById("modalID").textContent)
+
+  const index = newstorage.findIndex(ticket => String(ticket.id) === idToEdit);
+  document.getElementById('_id').textContent = newstorage[index].id
+  document.getElementById('editTitle').value = newstorage[index].title
+  document.getElementById('editSubject').value = newstorage[index].subject
+  document.getElementById('E_P_Select').value = newstorage[index].project
+  document.getElementById('E_U_Select').value = newstorage[index].priority
+  document.getElementById('editDesc').value = newstorage[index].desc
+  document.getElementById('editAssigned').value = newstorage[index].assignedTo
+
+  openEditModal()
+  closeModal()
+}
+
+saveChanges = () =>{
+  const raw = localStorage.getItem('issues')
+  let newstorage = JSON.parse(raw)
+
+  const id = document.getElementById('_id').textContent
+  const title = document.getElementById("editTitle").value
+  const subject = document.getElementById("editSubject").value
+  const project = document.getElementById("E_P_Select").value
+  const urgency = document.getElementById("E_U_Select").value
+  const desc = document.getElementById("editDesc").value
+  const assign = document.getElementById("editAssigned").value
+
+  const index = newstorage.findIndex(ticket => String(ticket.id) === String(id));
+
+  let temp = {
+    id: id,
+    title: title,
+    subject: subject,
+    priority: urgency,
+    desc: desc,
+    dateReported: newstorage[index].dateReported,
+    project: project,
+    assignedTo: assign,
+    completed: false,
+  }
+
+
+  newstorage[index] = temp
+
+  localStorage.setItem("issues", JSON.stringify(newstorage))
+  localStorageData = newstorage;
+  renderbugs()
+  closeCreateModal()
 }

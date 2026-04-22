@@ -37,7 +37,7 @@
             </div>
             <div id="buttons">
                 <button onclick="completeTicket()">Complete</button>
-                <button>Edit</button>
+                <button onclick="editTicket()">Edit</button>
                 <button onclick="deleteTicket()">Delete</button>
             </div>
         </div>
@@ -71,6 +71,44 @@
                 <textarea name="" id="Desc" placeholder="Please explain the problem in detail"></textarea>
                 <br><br>
                 <button type="submit" id="sub" onclick="createTicket()">Submit Tictet</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editOverlay">
+        <div class="modal-box">
+            <h1>Edit Ticket</h1>
+            <hr>
+            <form>
+                <label for="">ID:<span id="_id"></span></label><br><br>
+                <label for="" id="titlelable">Enter Title</label><br>
+                <input type="text" name="" id="editTitle" placeholder="Title of Ticket">
+                <br>
+                <label for="" id="subjectlable">Enter Subject</label><br>
+                <input type="text" name="" id="editSubject">
+                <br><br>
+                <select name="" id="E_P_Select">
+                    <option>Project-Selection</option>
+                    <option value="ProjectCD85">ProjectCD85</option>
+                    <option value="ProjectMD12">ProjectMD12</option>
+                </select>
+                <select name="" id="E_U_Select">
+                    <option>Urgency-Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Critical">Critical</option>
+                </select>
+                <br><br>
+                <textarea name="" id="editDesc" placeholder="Please explain the problem in detail"></textarea>
+                <br>
+                <select name="" id="editAssigned">
+                    <option value="Ryan Reynolds">Ryan Reynolds</option>
+                    <option value="Scarlett Johansson">Scarlett Johansson</option>
+                    <option value="Tom Hardy">Tom Hardy</option>
+                    <option value="Zendaya">Zendaya</option>
+                </select>
+                <br><br>
+                <button type="submit" onclick="saveChanges()">Save Changes</button>
             </form>
         </div>
     </div>
