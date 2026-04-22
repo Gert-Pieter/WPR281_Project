@@ -80,18 +80,25 @@ button,select
     color: red;
 }
 .system{
-    margin-left: 15px;
     color: #FFB800;
     font-weight: bold;
-    position: relative;
+    justify-content: left;
+    margin-left: 15px;
+    bottom: 5px;
+    flex: 1;
+    display: flex;
 }
 .copyright{
-    text-align: right;
+    justify-content: right;
     margin-right: 15px;
+    bottom: 5px;
+    flex:1;
+    display: flex;
 }
 footer
 {
-    position: relative;
     padding-bottom: 0px;
+    flex: 1; 
+    display: flex;
 }
 
