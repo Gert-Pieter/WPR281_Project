@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="modifingperson_project_admin.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="ProjectChoiceDropDown()">
         <header>
 
     </header>
@@ -17,27 +17,29 @@
                 <h1 class="heading">Create New Project</h1>
                 <input type="text" id="pname" name="pname" required placeholder="Project Name" pattern="[A-Za-z\-\`\s]+" minlength="3" maxlength="20">
                 <br>
-                <input type="text" id="cname" name="cname" required placeholder="Project Code" pattern="^[A-Z]{2}[0-9]{2}$" title="Two letters in upper case as well as 2 numbers following"><br>
-                <a id="projectCMsg"></a>
+                <input type="text" id="cname" name="cname" required placeholder="Project Code" pattern="^[A-Z]{2}[0-9]{2}$" title="Two letters in upper case as well as 2 numbers following">   
+                <a id="projectCMsg"> </a><br>
                 <input type="text" name="summary" id="summary" placeholder="Project Summary" minlength="5" maxlength="50"><br>
                 <textarea name="pdetails" id="pdetails" placeholder="Description" rows="10" cols="30" minlength="15" maxlength="200"></textarea>
                 <br/>
-                <button type="submit">Add Project</button>
+                <button onclick="addproject()" type="button">Add Project</button>
                 <a id="projectMsg"></a>
             </form>
         </fieldset>
         <fieldset id="removeproject">
             <form action="" id="removeProjectForm">
                 <h1 class="heading">Remove Project</h1>
-                <input type="text" id="rcname" name="rcname" required placeholder="Project Code">
-                <a id="projectrCMsg"></a>
+                <select id="ProjectCode" name="ProjectCode" required placeholder="Project Code">
+                <option value="" disabled selected>Choose Project</option>
+                </select>
                 <br>
-                <button type="submit">Remove Project</button>
-                <a id="projectrMsg"></a>
+                <button type="button" onclick="removingproject()">Remove Project</button>
+                <a id="messageSuccess"></a>
             </form>
         </fieldset>
         </p>
         <script src="local_storage.js" defer></script>
+        <script src="person_project.js" defer></script>
     </main>
     </center>
     <footer>

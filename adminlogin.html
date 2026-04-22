@@ -16,10 +16,14 @@
         <fieldset id="adminLoginStyle">
             <form action="" id="adminLogin">
                 <h1 class="heading">Admin Login</h1>
-                <input type="text" id="uname" name="uname" placeholder="Admin User name"><br>
-                <input type="text" id="email" name="email" placeholder="Admin email"><br>
-                <input type="password" id="password" name="password" placeholder="password"><br>
+                <input type="text" id="uname" name="uname" placeholder="Admin User name">
+                <a id="unmMsg"></a><br>
+                <input type="text" id="email" name="email" placeholder="Admin email">
+                <a id="emnMsg"></a><br>
+                <input type="password" id="password" name="password" placeholder="password">
+                <a id="pswMsg"></a><br>
                 <button type="button" onclick="checkingAdmin()">Login</button>
+                <a id="sLg"></a>
             </form>
         </fieldset>
         </center>
@@ -27,6 +31,7 @@
     <footer>
         
     </footer>
-    <script src="local_storage.js"></script>
+    <script src="local_storage.js" defer></script>
+    <script src="adminlogin.js" defer></script>
 </body>
 </html>
