@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues — Bug Tracker</title>
+    <link rel="shortcut icon" href="images/Issues.png" type="image/x-icon">
+    <link rel="stylesheet" href="issues.css">
+    <script src="issues.js"></script>
+    <script>src="local_storage.js"</script> 
+</head>
+<body>
+
+<!--new issue button -->
+<div class="page-header">
+    <h1>Issues</h1>
+    <button class="btn-primary" onclick="openCreateModal()">+ New Issue</button>
+</div>
+
+<!-- filter bar -->
+<div class="filters-bar">
+    <label>Search:</label>
+    <input type="text" id="searchInput" placeholder="Search title or subject…" oninput="renderTable()">
+
+    <label>Priority:</label>
+    <select id="filterPriority" onchange="renderTable()">
+        <option value="">All</option>
+        <option value="Critical">Critical</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+    </select>
+
+    <label>Status:</label>
+    <select id="filterStatus" onchange="renderTable()">
+        <option value="">All</option>
+        <option value="open">Open</option>
+        <option value="resolved">Resolved</option>
+        <option value="overdue">Overdue</option>
+    </select>
+
+    <label>Project:</label>
+    <select id="filterProject" onchange="renderTable()">
+        <option value="">All</option>
+    </select>
+</div>
+
+<div class="stats-row" id="statsRow"></div>
+
+<!-- issues table -->
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Project</th>
+                <th>Assigned To</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="issuesBody"></tbody>
+    </table>
+</div>
+
+<!-- detail view modal -->
+<div class="modal-overlay" id="detailOverlay" onclick="handleOverlayClick(event,'detailOverlay')">
+    <div class="modal-box" id="detailBox">
+        <button class="modal-close" onclick="closeModal('detailOverlay')">&times;</button>
+        <div class="detail-header">
+            <div class="tag-row">
+                <span id="d-priority" class="badge"></span>
+                <span id="d-status" class="status-badge"></span>
+            </div>
+            <h2 id="d-title"></h2>
+            <div class="id-tag" id="d-id"></div>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-field"><label>Project</label><span id="d-project"></span></div>
+            <div class="detail-field"><label>Assigned To</label><span id="d-assigned"></span></div>
+            <div class="detail-field"><label>Date Reported</label><span id="d-date"></span></div>
+            <div class="detail-field"><label>Target Resolution</label><span id="d-target"></span></div>
+            <div class="detail-field"><label>Resolved On</label><span id="d-resolved"></span></div>
+            <div class="detail-field"><label>Identified By</label><span id="d-identified"></span></div>
+            <div class="detail-field full"><label>Subject</label><span id="d-subject"></span></div>
+        </div>
+        <div class="detail-desc" id="d-desc"></div>
+
+        
+        <div id="d-resolution-wrap" style="margin-top:16px;display:none;">
+            <div class="detail-field full">
+                <label>Resolution Summary</label>
+                <div class="detail-desc" id="d-resolution"></div>
+            </div>
+        </div>
+        <div class="detail-actions">
+            <button class="btn-secondary" onclick="closeModal('detailOverlay')">Close</button>
+            <button class="btn-icon edit" id="d-edit-btn">Edit</button>
+            <button class="btn-icon delete" id="d-delete-btn">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="formOverlay" onclick="handleOverlayClick(event,'formOverlay')">
+    <div class="form-modal">
+        <button class="modal-close" onclick="closeModal('formOverlay')">&times;</button>
+
+        <h2 id="formTitle">New Issue</h2>
+
+        
+        <input type="hidden" id="formId">
+
+        <div class="form-grid">
+            <div class="form-group full">
+                <label>Title *</label>
+                <input type="text" id="fTitle" placeholder="SNAKE_CASE_TITLE" required>
+            </div>
+            <div class="form-group full">
+                <label>Subject *</label>
+                <input type="text" id="fSubject" placeholder="One-line summary of the issue">
+            </div>
+            <div class="form-group full">
+                <label>Description *</label>
+                <textarea id="fDesc" placeholder="Detailed description of the issue…"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Priority *</label>
+                <select id="fPriority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Critical">Critical</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status *</label>
+                <select id="fStatus">
+                    <option value="open">Open</option>
+                    <option value="overdue">Overdue</option>
+                    <option value="resolved">Resolved</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Project *</label>
+                <select id="fProject"></select>
+            </div>
+            <div class="form-group">
+                <label>Assigned To</label>
+                <select id="fAssigned"></select>
+            </div>
+            <div class="form-group">
+                <label>Identified By</label>
+                <select id="fIdentified"></select>
+            </div>
+            <div class="form-group">
+                <label>Date Reported</label>
+                <input type="date" id="fDate">
+            </div>
+            <div class="form-group">
+                <label>Target Resolution Date</label>
+                <input type="date" id="fTarget">
+            </div>
+            <div class="form-group">
+                <label>Actual Resolution Date</label>
+                <input type="date" id="fResolved">
+            </div>
+            <div class="form-group full">
+                <label>Resolution Summary</label>
+                <textarea id="fResolution" placeholder="What was done to fix this issue…" style="min-height:70px;"></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-secondary" onclick="closeModal('formOverlay')">Cancel</button>
+            <button class="btn-primary" onclick="saveIssue()">Save Issue</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="deleteOverlay" onclick="handleOverlayClick(event,'deleteOverlay')">
+    <div class="confirm-box">
+        <div class="confirm-icon"></div>
+        <h3>Delete this issue?</h3>
+        <p>This action cannot be undone. The issue will be permanently removed.</p>
+        <div class="confirm-actions">
+            <button class="btn-secondary" onclick="closeModal('deleteOverlay')">Cancel</button>
+            <button class="btn-danger" onclick="confirmDelete()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p class="system">System Status: Online</p>
+    <p class="copyright">&copy; Bug Tracker. All rights Reserved.</p>
+</footer>
+
+</body>
+</html>
