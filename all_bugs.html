@@ -35,6 +35,11 @@
                 <h4>Description:</h4>
                 <p id="modalDesc"></p>
             </div>
+            <div id="buttons">
+                <button onclick="CompleteTicket()">Complete</button>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
     </div>
 
@@ -65,7 +70,7 @@
                 <br><br>
                 <textarea name="" id="Desc" placeholder="Please explain the problem in detail"></textarea>
                 <br><br>
-                <button type="submit" id="sub">Submit Tictet</button>
+                <button type="submit" id="sub" onsubmit="createTicket()">Submit Tictet</button>
             </form>
         </div>
     </div>
