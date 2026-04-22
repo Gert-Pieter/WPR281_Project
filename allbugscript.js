@@ -1,6 +1,19 @@
 const localString = localStorage.getItem('issues')
 let localStorageData = JSON.parse(localString)
 
+function ProjectChoiceDropDown() { //This code provides a dropdown to remove projects or assign them to a person. It acts as form validation as the user is forced to choose one of them
+    let projects = JSON.parse(localStorage.getItem('projects')),PC = document.getElementById('ProjectChooice');
+
+    if (!PC) return;
+    
+    projects.forEach(element => {
+        let projectChoice = document.createElement('option');
+        projectChoice.value = element.code;
+        projectChoice.innerHTML = `<p><input type="checkbox" name="project" value="${element.code}" class="project-check filter-check">Project${element.code}</p>`;
+        PC.appendChild(projectChoice);        
+    });
+}
+
 function applyFilters(){
   const searchedTitles = document.getElementById('search').value;
   const searchTerm = searchedTitles.toLowerCase();
@@ -9,7 +22,7 @@ function applyFilters(){
   .map(cb => cb.value)
 
   const checkedProjects = Array.from(document.querySelectorAll('.project-check:checked'))
-  .map(cb => cb.value)
+  .map(cd => cd.value)
 
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;

@@ -229,6 +229,10 @@ label{
     text-align: right;
     margin-right: 15px;
 }
+footer
+{
+    position: relative;
+}
 input[type="checkbox"] {
     accent-color: #FFB800;
     width: 16px;
