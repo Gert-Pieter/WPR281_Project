@@ -122,6 +122,80 @@ window.onclick = function(event) {
   }
 }
 
-createTicket = () =>{
-  
+createTicket = (a=event) =>{
+  a.preventDefault()
+
+  const raw = localStorage.getItem('issues')
+  let newstorage = JSON.parse(raw)
+
+  const title = document.getElementById("titleinput").value
+  const subject = document.getElementById("subjectinput").value
+  const project = document.getElementById("P_Select").value
+  const urgency = document.getElementById("U_Select").value
+  const desc = document.getElementById("Desc").value
+
+  let temp = {
+    id: `#${(newstorage.length + 101)}`,
+    title: title,
+    subject: subject,
+    priority: urgency,
+    desc: desc,
+    project: project,
+    dateReported:  new Date().toISOString().split('T')[0],
+    completed: false,
+  }
+
+  newstorage.push(temp)
+
+  localStorage.setItem("issues", JSON.stringify(newstorage))
+  localStorageData = newstorage;
+  renderbugs()
+  closeCreateModal()
 };
+
+deleteTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToDelete = document.getElementById('modalID').textContent.trim()
+
+  newstorage = newstorage.filter(ticket => ticket.id != idToDelete);
+
+  localStorage.setItem('issues', JSON.stringify(newstorage));
+  localStorageData = newstorage;
+  renderbugs();
+  closeModal();
+}
+
+editTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToDelete = document.getElementById('modalID').textContent.trim()
+
+  newstorage = newstorage.filter(ticket => ticket.id != idToDelete);
+
+  localStorage.setItem('issues', JSON.stringify(newstorage));
+  localStorageData = newstorage;
+  renderbugs();
+  closeModal();
+}
+
+completeTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToDelete = document.getElementById('modalID').textContent.trim()
+
+  newstorage = newstorage.filter(ticket => {
+    if(ticket.id == idToDelete){
+      ticket.completed = true
+    }
+    return ticket
+  });
+
+  localStorage.setItem('issues', JSON.stringify(newstorage));
+  localStorageData = newstorage;
+  renderbugs();
+  closeModal();
+}
