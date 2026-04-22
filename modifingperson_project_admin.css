@@ -79,5 +79,19 @@ button,select
     font-style: italic;
     color: red;
 }
-
+.system{
+    margin-left: 15px;
+    color: #FFB800;
+    font-weight: bold;
+    position: relative;
+}
+.copyright{
+    text-align: right;
+    margin-right: 15px;
+}
+footer
+{
+    position: relative;
+    padding-bottom: 0px;
+}
 
