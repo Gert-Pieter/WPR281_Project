@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link rel="shortcut icon" href="images/Main.png" type="image/x-icon">
     <link rel="stylesheet" href="dashboardstyle.css">
     <script src="dashboardscript.js" defer></script>
@@ -16,6 +16,8 @@
         <ul>
             <li><a href="#" class="active-nav">Home</a></li>
             <li><a href="all_bugs.html">All Tickets</a></li>
+            <li><a href="modifingperson.html">Developers</a></li>
+            <li><a href="modifyingproject.html">Projects</a></li>
         </ul>
     </nav>
 
@@ -87,17 +89,17 @@
         <h2>This Week</h2>
         <div class="newnums">
             <img src="images/list.png">
-            <p class="number">4</p>
+            <p class="number" id="newbugs"></p>
             <p>Pending</p> 
         </div>
         <div class="inprogressnums">
             <img src="images/hourglass.png">
-            <p class="number">4</p>
+            <p class="number" id="progressbugs"></p>
             <p>In Progress</p>
         </div>
         <div class="completenums">
             <img src="images/check.png" alt="" srcset="">
-            <p class="number">4</p>
+            <p class="number" id="completebugs"></p>
             <p>Completed</p>
         </div>
     </div>

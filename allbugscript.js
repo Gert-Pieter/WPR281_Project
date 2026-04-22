@@ -27,7 +27,7 @@ function applyFilters(){
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
 
-  const filteredData = data.filter(bug => {
+  const filteredData = localStorageData.filter(bug => {
     const matchesTitles = searchTerm.length === 0 || bug.title.toLowerCase().includes(searchTerm);
 
     const matchesPriority = checkedPriorities.length === 0 || checkedPriorities.includes(bug.priority);

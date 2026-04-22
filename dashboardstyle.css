@@ -210,7 +210,7 @@ label{
 .card{
   background-color: #1A1A1A;
   height: 250px;
-  width: 550px;
+  min-width: 550px;
 }
 .card h4{
     padding: 20px;

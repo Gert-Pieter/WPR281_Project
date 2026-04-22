@@ -1,6 +1,28 @@
 const localString = localStorage.getItem('issues')
 let localStorageData = JSON.parse(localString)
 
+function setNumbers(){
+  const newnum = document.getElementById('newbugs')
+  const progressnum = document.getElementById('progressbugs')
+  const completenum = document.getElementById('completebugs')
+
+  let count1 = 0
+  let count2 = 0
+  let count3 = 0
+
+  localStorageData.forEach(element => {
+    if(element.assignedTo === '' && element.completed === false) count1++
+    if(element.assignedTo !== '' && element.completed === false) count2++
+    if(element.completed === true) count3++
+
+    return count1, count2, count3
+  });
+
+  newnum.textContent = count1
+  progressnum.textContent = count2
+  completenum.textContent = count3
+}
+
 function renderNewBugs(listToDisplay){
   const card = document.getElementById("new-row");
   card.innerHTML = '';
@@ -128,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNewBugs(localStorageData);
     renderInProgressBugs(localStorageData);
     renderCompleteBugs(localStorageData)
+    setNumbers()
+
 });
 
 renderbugs = () =>{

@@ -20,30 +20,32 @@ function checkingAdmin()
 
     if(input.password!=admin.password) {
         pswMsg.innerHTML = '<br>Wrong password, try again.';
-                   password.style.border = '1px solid red';
-                   pswMsg.style.color = 'red';
-                }
-                else {
-                    if(input.uname != admin.uname){
-                        unmMsg.innerHTML = '<br>wrong username, try again.';    
-                        uname.style.border = '1px solid red';
-                        unmMsg.style.color = 'red';
-                        return;
-                    }
-                    else{
-                        if(input.email!=admin.email)
-                            {
-                                emnMsg.innerHTML = 'wrong email, try again.';    
-                                email.style.border = '1px solid red';
-                                emnMsg.style.color = 'red';
-                                
-                                return;
-                            }
-                            else{
+        password.style.border = '1px solid red';
+        pswMsg.style.color = 'red';
+    }
+    else {
+        if(input.uname != admin.uname){
+            unmMsg.innerHTML = '<br>wrong username, try again.';    
+            uname.style.border = '1px solid red';
+            unmMsg.style.color = 'red';
+            return;
+        }
+        else{
+            if(input.email!=admin.email)
+            {
+                emnMsg.innerHTML = 'wrong email, try again.';    
+                email.style.border = '1px solid red';
+                emnMsg.style.color = 'red';
+                
+                return;
+            }
+            else{
                 sLg.innerHTML = '<br>Welcome Admin.';    
                 sLg.style.color = 'green';
                 adminLogin.reset();
-                return;
+                setTimeout(()=>{
+                    window.location.assign('dashboard.html')
+                }, 2000)
             }
         }
     }
