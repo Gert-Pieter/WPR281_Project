@@ -45,28 +45,27 @@
             <hr>
             <br>
             <form action="">
-                <label for="">Enter Title</label>
+                <label for="" id="titlelable">Enter Title</label><br>
                 <input type="text" name="" id="titleinput" placeholder="Title of Ticket">
-
-                <label for="">Enter Subject</label>
+                <br>
+                <label for="" id="subjectlable">Enter Subject</label><br>
                 <input type="text" name="" id="subjectinput">
-
-                <select name="" id="">
+                <br><br>
+                <select name="" id="P_Select">
                     <option>Project-Selection</option>
                     <option value="Group1">Group 1</option>
                     <option value="Group2">Group 2</option>
                 </select>
-
-                <select name="" id="">
+                <select name="" id="U_Select">
                     <option>Urgency-Level</option>
                     <option value="">Low</option>
                     <option value="">Medium</option>
                     <option value="">High</option>
                 </select>
-
-                <textarea name="" id="" placeholder="Please explain the problem in detail"></textarea>
-
-                <button type="submit">Submit Tictet</button>
+                <br><br>
+                <textarea name="" id="Desc" placeholder="Please explain the problem in detail"></textarea>
+                <br><br>
+                <button type="submit" id="sub">Submit Tictet</button>
             </form>
         </div>
     </div>
@@ -91,7 +90,7 @@
         </div>
         <div class="search">
             Search: <input type="text" class="search-filter" id="search">
-            <button onclick="openCreateModal()">Click Me</button>
+            <button onclick="openCreateModal()" id="create">New Ticket</button>
         </div>
         <div class="buglist" id="buglist">
 
