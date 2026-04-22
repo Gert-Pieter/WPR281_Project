@@ -39,16 +39,6 @@ body
     color:white;
     height: 125px;
 }
-#fname,#lname,#email,#uname:hover
-{
-    text-align: center;
-    border:none;
-    margin: 5px;
-    background-color: #373535;
-    border-radius: 50px;
-    color:white;
-    height: 25px;
-}
 input[type="file"] {
     display: none;
 }
@@ -65,7 +55,7 @@ input[type="file"] {
     margin-bottom: 10px;
 }
 
-button
+button,select
 {
     margin: 5px;
     border: none;
@@ -89,4 +79,5 @@ button
     font-style: italic;
     color: red;
 }
+
 

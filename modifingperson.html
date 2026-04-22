@@ -7,7 +7,7 @@
     <title>Document</title>
     
 </head>
-<body>
+<body onload="ProjectChoiceDropDown(); PeopleChoiceDropDown()">
     <header>
 
     </header>
@@ -24,8 +24,8 @@
                     <br/>
                     <input type="email" id="email" name="email" required placeholder="Person email">
                     <br>
-                    <label for="projectC">Project:</label>
-                    <select name="projectC" id="projectC" required>
+                    <label for="projectCode">Project:</label>
+                    <select name="ProjectCode" id="ProjectCode" required>
                         <option value="" disabled selected>Choose Project</option>
                     </select>
                     <br>
@@ -37,25 +37,26 @@
                     <br/>
                     <img id="preview" src="images/default.profile.pic.jpg" alt="Profile Picuture Preview">
                     <br/>
-                    <button type="submit">Add person</button>
-                    <br>
-                    <a id="successful"></a>
+                    <button type="submit" id="BtnAddPerson">Add person</button>
+                    <a id="successfullMsg"></a>
                 </form>
-            </fieldset><br><br>
+            </fieldset>
             <fieldset id="removingperson" >
                 <h1 class="heading">Remove a person </h1>
                 <form action="" id="removepersonform">
                     <!-- <label for="fname">First Name:</label> -->
-                    <input type="text" id="uname" name="uname" required placeholder="User name">
-                    <br/>
-                    <input type="email" id="email" name="email" required placeholder="Person email">
-                    <br/>
-                    <button type="submit">Remove Person</button>
-                    <br><a id="message"> </a>
+                    <select name="" id="PeopleChoose">
+                        <option value="" disabled selected>Choose person username</option>
+                    </select>
+                    <br>
+                    <a id="message"> </a>
+                    <button type="button" onclick="removingperson()">Remove Person</button>
+                    <a id="messageSuccess"></a>
                 </form>
             </fieldset>
         </p>
-        <script src="local_storage.js"></script>
+        <script src="local_storage.js" defer></script>
+        <script src="person_project.js" defer></script>
     </main>
 </center>
     <footer>
