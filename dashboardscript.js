@@ -1,62 +1,7 @@
-let data = [
-  {
-    id: "#101",
-    title: "ASSET_MAPPING_MISALIGNMENT",
-    subject: "Coordinates provided by satellite telemetry are offset by 4.2m on the Z-axis.",
-    priority: "Medium",
-    desc: "The mapping engine is failing to account for atmospheric refraction during high-angle passes, resulting in offset coordinate plots.",
-    project: "ProjectCD85",
-    assignedTo: "Ryan Reynolds",
-    dateReported: "2026-01-01",
-    completed: false
-  },
-  {
-    id: "#102",
-    title: "AUTH_TOKEN_EXPIRY_RECURSION",
-    subject: "User session refresh loop when token expires during active upload.",
-    priority: "Critical",
-    desc: "When a JWT expires exactly during a multipart file upload, the refresh interceptor enters an infinite loop, crashing the browser tab.",
-    project: "ProjectMD12",
-    assignedTo: "Scarlett Johansson",
-    dateReported: "2026-04-05",
-    completed: true
-  },
-  {
-    id: "#103",
-    title: "UI_HYDRATION_MISMATCH",
-    subject: "React hydration error on product landing page under slow 3G conditions.",
-    priority: "Low",
-    desc: "Server-side rendered HTML does not match client-side state when dynamic pricing modules load after initial paint.",
-    project: "ProjectCD85",
-    assignedTo: "Tom Hardy",
-    dateReported: "2026-04-10",
-    completed: false
-  },
-  {
-    id: "#104",
-    title: "DB_DEADLOCK_CONCURRENT_ORDER",
-    subject: "Database deadlock occurring during flash sale peak traffic.",
-    priority: "Critical",
-    desc: "The 'inventory' and 'order_items' tables are locking in reverse order when two users purchase the last item simultaneously.",
-    project: "ProjectMD12",
-    assignedTo: "",
-    dateReported: "2026-04-12",
-    completed: false
-  },
-  {
-    id: "#105",
-    title: "CSS_GRID_OVERFLOW_SAFARI",
-    subject: "Dashboard layout collapses on Safari versions older than 15.4.",
-    priority: "Medium",
-    desc: "The sidebar 'fr' units are being calculated as 0px because of a lack of support for certain aspect-ratio properties.",
-    project: "ProjectCD85",
-    assignedTo: "Zendaya",
-    dateReported: "2026-04-15",
-    completed: true
-  }
-];
+const localString = localStorage.getItem('issues')
+let localStorageData = JSON.parse(localString)
 
-function renderNewBugs(listToDisplay = data){
+function renderNewBugs(listToDisplay){
   const card = document.getElementById("new-row");
   card.innerHTML = '';
 
@@ -180,12 +125,19 @@ function renderCompleteBugs(listToDisplay = data){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderNewBugs();
-    renderInProgressBugs();
-    renderCompleteBugs()
+    renderNewBugs(localStorageData);
+    renderInProgressBugs(localStorageData);
+    renderCompleteBugs(localStorageData)
 });
 
+renderbugs = () =>{
+  renderNewBugs(localStorageData);
+  renderInProgressBugs(localStorageData);
+  renderCompleteBugs(localStorageData)
+}
+
 const modal = document.getElementById('modalOverlay');
+const e_modal = document.getElementById('editOverlay')
 
 function openModal(bug) {
   modal.querySelector('#modalTitle').textContent = bug.title;
@@ -203,9 +155,105 @@ function closeModal() {
   modal.style.display = 'none';
 }
 
+function openEditModal(){
+  e_modal.style.display = 'flex'
+}
+
+function closeEditModal(){
+  e_modal.style.display = 'none'
+}
+
 // Close the modal if the user clicks ANYWHERE outside the white box
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == modal || event.target == e_modal) {
     closeModal();
+    closeEditModal();
   }
+}
+
+deleteTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToDelete = document.getElementById('modalID').textContent.trim()
+
+  newstorage = newstorage.filter(ticket => ticket.id != idToDelete);
+
+  localStorage.setItem('issues', JSON.stringify(newstorage));
+  localStorageData = newstorage;
+  renderbugs();
+  closeModal();
+}
+
+completeTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToDelete = document.getElementById('modalID').textContent
+
+  newstorage = newstorage.filter(ticket => {
+    if(ticket.id == idToDelete){
+      ticket.completed = true
+    }
+    return ticket
+  });
+
+  localStorage.setItem('issues', JSON.stringify(newstorage));
+  localStorageData = newstorage;
+  renderbugs();
+  closeModal();
+}
+
+editTicket = () => {
+  const raw = localStorage.getItem('issues');
+  let newstorage = JSON.parse(raw);
+
+  let idToEdit = String(document.getElementById("modalID").textContent)
+
+  const index = newstorage.findIndex(ticket => String(ticket.id) === idToEdit);
+  document.getElementById('_id').textContent = newstorage[index].id
+  document.getElementById('editTitle').value = newstorage[index].title
+  document.getElementById('editSubject').value = newstorage[index].subject
+  document.getElementById('E_P_Select').value = newstorage[index].project
+  document.getElementById('E_U_Select').value = newstorage[index].priority
+  document.getElementById('editDesc').value = newstorage[index].desc
+  document.getElementById('editAssigned').value = newstorage[index].assignedTo
+
+  openEditModal()
+  closeModal()
+}
+
+saveChanges = () =>{
+  const raw = localStorage.getItem('issues')
+  let newstorage = JSON.parse(raw)
+
+  const id = document.getElementById('_id').textContent
+  const title = document.getElementById("editTitle").value
+  const subject = document.getElementById("editSubject").value
+  const project = document.getElementById("E_P_Select").value
+  const urgency = document.getElementById("E_U_Select").value
+  const desc = document.getElementById("editDesc").value
+  const assign = document.getElementById("editAssigned").value
+
+  const index = newstorage.findIndex(ticket => String(ticket.id) === String(id));
+
+  let temp = {
+    id: id,
+    title: title,
+    subject: subject,
+    priority: urgency,
+    desc: desc,
+    dateReported: newstorage[index].dateReported,
+    project: project,
+    assignedTo: assign,
+    completed: false,
+  }
+
+
+  newstorage[index] = temp
+
+  localStorage.setItem("issues", JSON.stringify(newstorage))
+  localStorageData = newstorage;
+  renderbugs()
+  closeCreateModal()
 }
