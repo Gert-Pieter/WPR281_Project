@@ -14,7 +14,7 @@ function applyFilters(){
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
 
-  const filteredData = data.filter(bug => {
+  const filteredData = localStorageData.filter(bug => {
     const matchesTitles = searchTerm.length === 0 || bug.title.toLowerCase().includes(searchTerm);
 
     const matchesPriority = checkedPriorities.length === 0 || checkedPriorities.includes(bug.priority);
@@ -77,6 +77,19 @@ function renderbugs(listToDisplay = localStorageData) {
 
     buglist.appendChild(bugcard);
   })
+}
+
+function getProjectFilters(){
+  const skoef = localStorage.getItem('people')
+  let newData = JSON.parse(skoef)
+
+  const target = document.getElementById("projectfilters")
+
+  let container = document.createElement('p')
+  let check = document.createElement('input')
+  check.setAttribute("type","checkbox")
+  check.setAttribute("name","project")
+  check.setAttribute("class","project-check filter-check")
 }
 
 document.addEventListener('DOMContentLoaded', () => {
