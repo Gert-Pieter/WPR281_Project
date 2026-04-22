@@ -64,6 +64,10 @@ form{
     background-color:#333 ;
     color: white;
 }
+.alt-button{
+    border-radius: 5px;
+    width: 100px;
+}
 textarea{
     resize: vertical;
     background-color:#1a1a1a;
