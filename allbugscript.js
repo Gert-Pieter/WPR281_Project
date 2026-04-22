@@ -79,19 +79,6 @@ function renderbugs(listToDisplay = localStorageData) {
   })
 }
 
-function getProjectFilters(){
-  const skoef = localStorage.getItem('people')
-  let newData = JSON.parse(skoef)
-
-  const target = document.getElementById("projectfilters")
-
-  let container = document.createElement('p')
-  let check = document.createElement('input')
-  check.setAttribute("type","checkbox")
-  check.setAttribute("name","project")
-  check.setAttribute("class","project-check filter-check")
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     renderbugs();
 });
