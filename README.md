@@ -70,3 +70,15 @@ The only notifying the JS does is when a wrong code is entered otherwise the bro
 
 Just like removing a Person a drop down is used to show all the projects codes.
 
+# Ticket Display
+### Dashboard
+
+The Dashboard serves as the primary visual hub for ticket management. All tickets are shown in their relevant categories in the dashboard. With the new tickets being the tickets that have not been assigned yet, the in progress ticket being one that has been assigned but not completed yet, and the completed tickets
+
+Every ticket is interactive, by clicking it brings up a modal to show all relevant info of the ticket which includes the subject and description of the issue. In this modal buttons can be found that interacts with the bug to complete, delete or edit the details of the bug, which will take you to a seperate modal to edit the tickets
+
+### All Tickets
+
+In this page we show all the tickets in a table form with relevant filters to quickly find required tickets. This page uses the same modal approach to view and edit the specifics of the ticket. These filters are built on our applyFilters() function which instantly updates the table based on search terms, project codes, priority levels, or date ranges.
+
+As well as the viewing and filtering of tickets, the creation of new tickets can be done here by clicking the create button next to the search bar. Here you will be greeted by modal with a form which will capture all the necessary data of the ticket so it can be stored in the local storage. This will then instantly refresh the page and show the new ticket. There is no assigning of people to the ticket as this would primarily be done by the admin and is thus behind the edit ticket functionality. 
