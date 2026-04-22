@@ -12,8 +12,9 @@ function ProjectChoiceDropDown() { //This code provides a dropdown to remove pro
         checkbox.setAttribute('type', 'checkbox')
         checkbox.className = 'project-check filter-check';
         checkbox.value = 'Project' + element.code
+        checkbox.addEventListener('change', applyFilters)
         projectChoice.appendChild(checkbox);
-
+        
         let labelText = document.createTextNode('Project' + element.code);
         projectChoice.appendChild(labelText);
 
@@ -41,6 +42,7 @@ function applyFilters(){
     const matchesPriority = checkedPriorities.length === 0 || checkedPriorities.includes(bug.priority);
 
     const matchesProject = checkedProjects.length === 0 || checkedProjects.includes(bug.project);
+    console.log(matchesProject)
 
     const bugdate = new Date(bug.dateReported);
     const minDate = startDate ? new Date(startDate): null;
