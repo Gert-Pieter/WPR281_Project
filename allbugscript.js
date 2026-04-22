@@ -146,6 +146,7 @@ createTicket = (a=event) =>{
     priority: urgency,
     desc: desc,
     project: project,
+    assignedTo: '',
     dateReported:  new Date().toISOString().split('T')[0],
     completed: false,
   }
@@ -159,20 +160,6 @@ createTicket = (a=event) =>{
 };
 
 deleteTicket = () => {
-  const raw = localStorage.getItem('issues');
-  let newstorage = JSON.parse(raw);
-
-  let idToDelete = document.getElementById('modalID').textContent.trim()
-
-  newstorage = newstorage.filter(ticket => ticket.id != idToDelete);
-
-  localStorage.setItem('issues', JSON.stringify(newstorage));
-  localStorageData = newstorage;
-  renderbugs();
-  closeModal();
-}
-
-editTicket = () => {
   const raw = localStorage.getItem('issues');
   let newstorage = JSON.parse(raw);
 

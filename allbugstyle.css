@@ -8,6 +8,14 @@ h1 {
     margin-left: 40px;
     color: #FFB800;
 }
+button{
+    height: 30px;
+    width: 80px;
+    background-color:#585858;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+}
 nav {
     display: grid;
     grid-template-columns: 1fr, 2fr, 1fr;
@@ -43,7 +51,6 @@ footer{
     grid-template-columns: repeat(1fr, 3);
 }
 form{
-    border: 2px solid #745300;
     padding: 10px 50px 10px 50px;
 }
 #titleinput, #subjectinput{
@@ -52,7 +59,7 @@ form{
     height: 20px;
     font-size: 12pt;
 }
-#P_Select, #U_Select{
+#P_Select, #U_Select, #E_P_Select, #E_U_Select, #editAssigned{
     width: 150px;
     background-color:#333 ;
     color: white;
@@ -245,4 +252,5 @@ input[type='text']{
     color: white;
     width: 50%;
     margin-top: 5px;
+    margin-bottom: 5px;
 }
