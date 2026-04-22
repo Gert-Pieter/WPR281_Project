@@ -7,7 +7,7 @@ function ProjectChoiceDropDown() { //This code provides a dropdown to remove pro
     if (!PC) return;
     
     projects.forEach(element => {
-        let projectChoice = document.createElement('option');
+        let projectChoice = document.createElement('p');
         projectChoice.value = element.code;
         projectChoice.innerHTML = `<p><input type="checkbox" name="project" value="${element.code}" class="project-check filter-check">Project${element.code}</p>`;
         PC.appendChild(projectChoice);        
@@ -94,6 +94,8 @@ function renderbugs(listToDisplay = localStorageData) {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderbugs();
+    getAllProjects();
+    getAllPeople();
 });
 
 const modal = document.getElementById('modalOverlay');
@@ -138,6 +140,41 @@ function openEditModal(){
 
 function closeEditModal(){
   e_modal.style.display = 'none'
+}
+
+getAllProjects = () => {
+  const raw = localStorage.getItem('projects')
+  let newstorage = JSON.parse(raw)
+
+  const target = document.getElementById('P_Select')
+  const target2 = document.getElementById('E_P_Select')
+
+  newstorage.forEach(element => {
+    let project = document.createElement('option')
+    project.value = element.code;
+    project.textContent = 'Project' + element.code
+    target.appendChild(project)
+  })
+  newstorage.forEach(element => {
+    let project = document.createElement('option')
+    project.value = element.code;
+    project.textContent = 'Project' + element.code
+    target2.appendChild(project)
+  })
+}
+
+getAllPeople = () => {
+  const raw = localStorage.getItem('people')
+  let newstorage = JSON.parse(raw)
+
+  const target = document.getElementById('editAssigned')
+
+  newstorage.forEach(element => {
+    let person = document.createElement('option')
+    person.value = element.FirstName + ' ' + element.LastName;
+    person.textContent = element.FirstName + ' ' + element.LastName;
+    target.appendChild(person)
+  })
 }
 
 createTicket = (a=event) =>{
