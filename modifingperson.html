@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="modifingperson.css">
+    <link rel="stylesheet" href="modifingperson_project_admin.css">
     <title>Document</title>
     
 </head>
-<body>
+<body onload="ProjectChoiceDropDown(); PeopleChoiceDropDown()">
     <header>
 
     </header>
-
+<center>
     <main>
         <p>
             <fieldset id="addingperson">
-                <h1>Create New Person</h1>
+                <h1 class="heading">Add New Person</h1>
                 <form action="" id="personForm">
                     <input type="text" id="fname" name="fname" required placeholder="First Name" minlength="2" pattern="[A-Za-z\-\`]+" title="First name should be longer then 2, not contain any characters that aren't ` or - and not contain any numbers."> 
                     <!-- Form validation is in place it checks that the minal is at least above 2 and that it allowee -->
@@ -23,31 +23,42 @@
                     <input type="text" id="lname" name="lname" required placeholder="Last Name" minlength="3" pattern="[A-Za-z\-\`\s]+" title="Sure name should be longer then 2, not contain any characters that aren't ` or - and not contain any numbers.">
                     <br/>
                     <input type="email" id="email" name="email" required placeholder="Person email">
+                    <br>
+                    <label for="projectCode">Project:</label>
+                    <select name="ProjectCode" id="ProjectCode" required>
+                        <option value="" disabled selected>Choose Project</option>
+                    </select>
+                    <br>
+                    <a id="email-wrong"></a>
                     <br/>
                     <label class="customName">
                     <input type="file" name="pPic" id="pPic" accept="image/*">upload picture
                     </label>
                     <br/>
-                    <img id="preview" src="" alt="Profile Picuture Preview">
+                    <img id="preview" src="images/default.profile.pic.jpg" alt="Profile Picuture Preview">
                     <br/>
-                    <button type="submit">Add person</button>
+                    <button type="submit" id="BtnAddPerson">Add person</button>
+                    <a id="successfullMsg"></a>
                 </form>
-            </fieldset><br><br>
+            </fieldset>
             <fieldset id="removingperson" >
-                <h1>Remove a person </h1>
+                <h1 class="heading">Remove a person </h1>
                 <form action="" id="removepersonform">
                     <!-- <label for="fname">First Name:</label> -->
-                    <input type="text" id="uname" name="uname" required placeholder="User name">
-                    <br/>
-                    <input type="email" id="email" name="email" required placeholder="Person email">
-                    <br/>
-                    <button type="submit">Remove Person</button>
+                    <select name="" id="PeopleChoose">
+                        <option value="" disabled selected>Choose person username</option>
+                    </select>
+                    <br>
+                    <a id="message"> </a>
+                    <button type="button" onclick="removingperson()">Remove Person</button>
+                    <a id="messageSuccess"></a>
                 </form>
             </fieldset>
         </p>
-        <script src="local_storage.js"></script>
+        <script src="local_storage.js" defer></script>
+        <script src="person_project.js" defer></script>
     </main>
-    
+</center>
     <footer>
 
     </footer>
