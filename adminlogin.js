@@ -40,7 +40,7 @@ function checkingAdmin()
                 return;
             }
             else{
-                sLg.innerHTML = '<br>Welcome Admin.';    
+                sLg.innerHTML = '<br>Welcome Admin. Please wait';    
                 sLg.style.color = 'green';
                 adminLogin.reset();
                 setTimeout(()=>{
