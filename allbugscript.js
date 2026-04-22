@@ -7,9 +7,18 @@ function ProjectChoiceDropDown() { //This code provides a dropdown to remove pro
     if (!PC) return;
     
     projects.forEach(element => {
-        let projectChoice = document.createElement('option');
-        projectChoice.value = element.code;
-        projectChoice.innerHTML = `<p><input type="checkbox" name="project" value="${element.code}" class="project-check filter-check">Project${element.code}</p>`;
+        let projectChoice = document.createElement('p');
+        let checkbox = document.createElement('input')
+        checkbox.setAttribute('type', 'checkbox')
+        checkbox.className = 'project-check filter-check';
+        checkbox.value = 'Project' + element.code
+        checkbox.addEventListener('change', applyFilters)
+        projectChoice.appendChild(checkbox);
+        
+        let labelText = document.createTextNode('Project' + element.code);
+        projectChoice.appendChild(labelText);
+
+
         PC.appendChild(projectChoice);        
     });
 }
@@ -33,6 +42,7 @@ function applyFilters(){
     const matchesPriority = checkedPriorities.length === 0 || checkedPriorities.includes(bug.priority);
 
     const matchesProject = checkedProjects.length === 0 || checkedProjects.includes(bug.project);
+    console.log(matchesProject)
 
     const bugdate = new Date(bug.dateReported);
     const minDate = startDate ? new Date(startDate): null;
@@ -94,6 +104,8 @@ function renderbugs(listToDisplay = localStorageData) {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderbugs();
+    getAllProjects();
+    getAllPeople();
 });
 
 const modal = document.getElementById('modalOverlay');
@@ -138,6 +150,41 @@ function openEditModal(){
 
 function closeEditModal(){
   e_modal.style.display = 'none'
+}
+
+getAllProjects = () => {
+  const raw = localStorage.getItem('projects')
+  let newstorage = JSON.parse(raw)
+
+  const target = document.getElementById('P_Select')
+  const target2 = document.getElementById('E_P_Select')
+
+  newstorage.forEach(element => {
+    let project = document.createElement('option')
+    project.value = element.code;
+    project.textContent = 'Project' + element.code
+    target.appendChild(project)
+  })
+  newstorage.forEach(element => {
+    let project = document.createElement('option')
+    project.value = element.code;
+    project.textContent = 'Project' + element.code
+    target2.appendChild(project)
+  })
+}
+
+getAllPeople = () => {
+  const raw = localStorage.getItem('people')
+  let newstorage = JSON.parse(raw)
+
+  const target = document.getElementById('editAssigned')
+
+  newstorage.forEach(element => {
+    let person = document.createElement('option')
+    person.value = element.FirstName + ' ' + element.LastName;
+    person.textContent = element.FirstName + ' ' + element.LastName;
+    target.appendChild(person)
+  })
 }
 
 createTicket = (a=event) =>{
